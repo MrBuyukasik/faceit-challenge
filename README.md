@@ -18,6 +18,8 @@ First use this command to init local API
 ### `yarn start`
 Init React-native metro bundler.
 
+Note: If you are using an Android device, you need to change Endpoint.ts in API_URL: localhost with your local IP which returns ifconfig | grep 192.168.1. command.
+
 
 ## Prerequisites
 
