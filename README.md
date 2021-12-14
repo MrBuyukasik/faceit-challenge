@@ -20,7 +20,7 @@ Local API working on: http://localhost:4000
 ### `yarn start`
 Init React-native metro bundler.
 
-Note: If you are using an Android device, you need to change Endpoint.ts in API_URL: localhost with your local IP which returns ifconfig | grep 192.168.1. command.
+Note: If you are using an Android device, you need to change API_URL in Endpoint.ts file localhost with your local IP which returns ifconfig | grep 192.168.1. command.
 
 
 ## Prerequisites
