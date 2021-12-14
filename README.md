@@ -10,6 +10,7 @@ Short video demonstration: https://drive.google.com/file/d/1SDy2Pklom0hJNCtBBISS
 In the project directory, you can run:
 
 ### `yarn`
+install project dependencies, for iOS you also use `cd ios && pod install` for first run
 
 ### `yarn start:api`
 First use this command to init local API
@@ -17,7 +18,6 @@ First use this command to init local API
 ### `yarn start`
 Init React-native metro bundler.
 
-install project dependencies, for iOS you also use `cd ios && pod install` for first run
 
 ## Prerequisites
 
