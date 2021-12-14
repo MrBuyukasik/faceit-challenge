@@ -15,6 +15,8 @@ install project dependencies, for iOS you also use `cd ios && pod install` for f
 ### `yarn start:api`
 First use this command to init local API
 
+Local API working on: http://localhost:4000
+
 ### `yarn start`
 Init React-native metro bundler.
 
