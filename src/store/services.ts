@@ -1,7 +1,6 @@
 import { Platform } from "react-native";
 import { Api, postsApi } from "../apis";
 import store from "./storeConfig";
-import { ECredentials } from "../apis";
 
 import endpoint from "../common/endpoint";
 
@@ -20,8 +19,6 @@ export const headers = (accept: string, acceptLanguage: string) => ({
   Accept: accept,
   "Content-Type": "application/json",
   "Accept-Language": acceptLanguage,
-  // @ts-ignore
-  ...nativeHeaders,
 });
 
 // @ts-ignore
@@ -33,6 +30,5 @@ Promise.resolve().then(() => {
 
 Api.setBaseUrl(BASE_PATH);
 Api.setHeaders(headers("application/json", ""));
-Api.setCredentials(ECredentials.INCLUDE);
 
 export const PostsApi = postsApi;

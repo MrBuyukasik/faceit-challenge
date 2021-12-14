@@ -6,15 +6,22 @@ import { MemoryHistory } from "history";
 import { RootState } from "../../store/reducers/rootReducer";
 import theme from "../../common/theme";
 import TopBar from "../top-bar/TopBar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
-const ScreenContainer = styled(View)`
+const ScreenContainer = styled(SafeAreaView)`
   flex:1;
   justify-content: space-between;
   background-color:${theme.palette.background.body};
 `;
 
-const Page = styled(ScrollView)`
+const PageScroll = styled(ScrollView)`
+  flex:1;
+  padding: 12px 20px;
+`;
+
+const Page = styled(View)`
+  flex:1;
   padding: 12px 20px;
 `;
 
@@ -26,13 +33,19 @@ interface ScreenProps {
   headerText?: string;
   goBack?(): void;
   refreshControl?: any;
+  unScrollable?: boolean;
 }
 
 const Screen = (props: ScreenProps) => {
   return (
     <ScreenContainer>
       <TopBar {...props} />
-      <Page refreshControl={props?.refreshControl}>{props.children}</Page>
+      {props?.unScrollable ? (
+        <Page>{props.children}</Page>
+
+      ) : (
+        <PageScroll refreshControl={props?.refreshControl}>{props.children}</PageScroll>
+      )}
     </ScreenContainer>
   );
 };

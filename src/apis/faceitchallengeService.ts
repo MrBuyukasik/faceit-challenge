@@ -9,8 +9,13 @@ export const Api = new ApiService();
 
 export const postsApi = (() => {
   return {
-    getAllPosts() {
-      const localVarPath = `/posts`;
+    getAllPosts(pageSize: number, page: number) {
+      isRequired("pageSize", "page", "getAllPosts");
+
+      const localVarPath = `/posts/{pageSize}/{page}`
+        .replace(`{${"pageSize"}}`, encodeURIComponent(String(pageSize)))
+        .replace(`{${"page"}}`, encodeURIComponent(String(page)));
+
       const localVarUrlObj = url.parse(localVarPath, true);
 
       const localVarQueryParameter = {};

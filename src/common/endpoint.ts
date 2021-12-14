@@ -1,5 +1,5 @@
 const endpoint = {
-  API_URL: "https://60ba6d9742e1d0001761fa73.mockapi.io",
+  API_URL: "http://localhost:4000",
 };
 
 export default endpoint;

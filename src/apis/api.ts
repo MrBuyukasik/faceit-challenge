@@ -13,7 +13,6 @@ interface IConfiguration {
 export class ApiService {
   private headers = {};
   private baseUrl = "";
-  private credentials: ECredentials = ECredentials.SAME_ORIGIN;
 
   public setHeaders(headers: object, isOverride?: boolean) {
     if (isOverride) {
@@ -25,10 +24,6 @@ export class ApiService {
 
   public setBaseUrl(baseUrl: string) {
     this.baseUrl = baseUrl;
-  }
-
-  public setCredentials(credentials: ECredentials) {
-    this.credentials = credentials;
   }
 
   public getHeaders(): any {
@@ -53,8 +48,6 @@ export class ApiService {
         method: method as Method,
         baseURL: this.baseUrl,
         url,
-        withCredentials: true,
-        headers: this.getHeaders(),
         data: body,
       })
         .then((response) => {

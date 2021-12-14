@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity, FlatList, RefreshControl, Alert } from "react-native";
 import { connect, useDispatch } from "react-redux";
 import { MemoryHistory } from "history";
-
 import Screen from "../components/screen/Screen"
 import styled from "styled-components";
 import { POST_BODY_MAX_LENGTH } from "../common/constants/constants";
@@ -11,6 +10,10 @@ import { RootState } from "../store/reducers/rootReducer";
 import {
   getAllPosts
 } from '../store/actions/postActions';
+import {
+  hideLoading,
+  showLoading
+} from '../store/actions/commonActions';
 import { PostsResponse } from "../apis";
 import theme from "../common/theme";
 
@@ -58,20 +61,20 @@ const Space = styled(View)`
 
 interface FeedScreenProps {
   history: MemoryHistory;
-  getAllPosts(): void;
+  getAllPosts(pageSize: number, page: number): any;
   getPostsResponse?: PostsResponse[]
 }
 
 const FeedScreen = (props: FeedScreenProps) => {
   const [isFetching, setIsFetching] = useState(false)
   const [postData, setPostaData] = useState<any>()
-  const [addNewPostCount, setAddNewPostCount] = useState(10)
-  useEffect(() => {
-    props.getAllPosts().then((response) => {
-      console.log("response", response)
-    })
-  }, [])
+  const [pageSize] = useState(10)
+  const [page, setPage] = useState(1)
 
+
+  useEffect(() => {
+    props.getAllPosts(pageSize, page)
+  }, [])
 
   useEffect(() => {
     setPostaData(props?.getPostsResponse)
@@ -103,19 +106,19 @@ const FeedScreen = (props: FeedScreenProps) => {
     )
   }
 
-  const handlePostsRefresh = () => {
-    if (postData?.length >= addNewPostCount) {
-      setAddNewPostCount(addNewPostCount + 10)
-    }
-    else {
-      Alert.alert("New Post not avaiable")
-    }
+  const handlePostsRefresh = async () => {
+    await setPage(page + 1)
+    props.getAllPosts(pageSize, page).then((response: any) => {
+      if (response && response.payload && !response.payload.length) {
+        Alert.alert("Sorry no more available content for now.")
+      }
+    })
   }
 
 
 
   return (
-    <Screen refreshControl={
+    <Screen unScrollable refreshControl={
       <RefreshControl
         refreshing={isFetching}
         onRefresh={handlePostsRefresh}
@@ -125,7 +128,7 @@ const FeedScreen = (props: FeedScreenProps) => {
         style={{ flex: 1 }}
         onRefresh={handlePostsRefresh}
         refreshing={isFetching}
-        data={postData.reverse().slice(0, addNewPostCount)}
+        data={postData}
         renderItem={handleRenderPosts}
         keyExtractor={(_, index) => index.toString()}
       />}
@@ -138,7 +141,9 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  getAllPosts
+  getAllPosts,
+  showLoading,
+  hideLoading
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedScreen);

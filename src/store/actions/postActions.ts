@@ -6,7 +6,7 @@ export enum POSTS_ACTION_TYPE {
 }
 
 // @ts-ignore
-export const getAllPosts: ActionCreator = () => ({
+export const getAllPosts: ActionCreator = (pageSize: number, page: number) => ({
   type: POSTS_ACTION_TYPE.GET_POSTS,
-  payload: PostsApi.getAllPosts(),
+  payload: PostsApi.getAllPosts(pageSize, page),
 });

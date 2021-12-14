@@ -1,7 +1,7 @@
 import { PostsResponse } from "../apis";
 
 interface Posts {
-  getPostsResponse?: PostsResponse[];
+  getPostsResponse: PostsResponse[];
 }
 
 export type PostsState = Readonly<Posts>;

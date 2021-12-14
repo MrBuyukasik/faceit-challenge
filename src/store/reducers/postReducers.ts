@@ -5,9 +5,11 @@ import { COMMON_ACTION_TYPE } from "../actions/commonActions";
 import { Action } from "../../models/action";
 import { CommonState } from "../../models/common";
 import { PostsState } from "../../models/posts";
-import { POSTS_ACTION_TYPE } from "../actions/postActions";
+import { getAllPosts, POSTS_ACTION_TYPE } from "../actions/postActions";
 
-const initialState: PostsState = {};
+const initialState: PostsState = {
+  getPostsResponse: [],
+};
 
 const reducer: Reducer<PostsState, Action> = (
   state: PostsState = initialState,
@@ -22,7 +24,7 @@ const reducer: Reducer<PostsState, Action> = (
 
       payload = {
         ...state,
-        getPostsResponse: action.payload,
+        getPostsResponse: [...action.payload, ...state.getPostsResponse],
       };
 
       return payload;
