@@ -2,7 +2,6 @@ const express = require("express")
 const bodyParser=require("body-parser")
 const posts = require("./posts.json")
 const users = require("./users.json")
-const cors = require('cors');
 
 const app = express()
 
@@ -10,7 +9,6 @@ const paginate = (array, page_size, page_number) =>  {
     return array.slice((page_number - 1) * page_size, page_number * page_size);
    }
 
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/posts",(req,res,next)=>{
