@@ -11,6 +11,12 @@ In the project directory, you can run:
 
 ### `yarn`
 
+### `yarn start:api`
+First use this command to init local API
+
+### `yarn start`
+Init React-native metro bundler.
+
 install project dependencies, for iOS you also use `cd ios && pod install` for first run
 
 ## Prerequisites
